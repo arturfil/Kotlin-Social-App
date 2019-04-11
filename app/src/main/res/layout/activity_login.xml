@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:fillViewport="true"
+    android:id="@+id/scroll_view"
+    android:scrollbars="none"
+    >
+
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ImageView
+        android:id="@+id/instagram_image"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:src="@drawable/insta_logo"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <EditText
+        android:id="@+id/email_input"
+        style="@style/login_input"
+        app:layout_constraintTop_toBottomOf="@+id/instagram_image"
+        android:inputType="textEmailAddress"
+        android:hint="Email"
+        />
+
+    <EditText
+        android:id="@+id/password_input"
+        style="@style/login_input"
+        app:layout_constraintTop_toBottomOf="@+id/email_input"
+        android:inputType="textPassword"
+        android:hint="Password"
+        />
+
+    <Button
+        android:id="@+id/login_btn"
+        style="@style/login_btn"
+        app:layout_constraintTop_toBottomOf="@id/password_input"
+        android:text="Log In"
+        android:textAllCaps="false"
+        />
+
+    <TextView
+        android:id="@+id/create_account_text"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/create_account"
+        android:gravity="center"
+        android:background="@drawable/top_border_grey"/>
+
+</android.support.constraint.ConstraintLayout>
+
+</ScrollView>

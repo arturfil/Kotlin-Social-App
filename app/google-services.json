@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "323111198922",
+    "firebase_url": "https://istagramkotlin.firebaseio.com",
+    "project_id": "istagramkotlin",
+    "storage_bucket": "istagramkotlin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323111198922:android:663ab394204c58d2",
+        "android_client_info": {
+          "package_name": "com.arturofilio.instagram_kotlin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "323111198922-2cq5cu33d68g78aqu1r5mvr5odjqjcn9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.arturofilio.instagram_kotlin",
+            "certificate_hash": "8efe802d6cef29f444c2f89f38be3f3ec4731d68"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYagkE4R5A_9Wj8EWOZ1IOfdJ8CrH5L_c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "323111198922-aisba8qvhhc89t5j8hq0rl1q5kagd8uh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
