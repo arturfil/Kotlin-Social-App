@@ -19,7 +19,7 @@ class HomeActivity : BaseActivity(0) {
         setupBottomNavigation()
 
         mAuth = FirebaseAuth.getInstance()
-        mAuth.signOut()
+//        mAuth.signOut()
 
     }
 

@@ -1,5 +1,6 @@
 package com.arturofilio.instagram_kotlin
 
+import android.content.Intent
 import android.inputmethodservice.Keyboard
 import android.opengl.Visibility
 import android.support.v7.app.AppCompatActivity
@@ -26,7 +27,7 @@ class LoginActivity : AppCompatActivity(), KeyboardVisibilityEventListener, Text
         Log.d(TAG, "onCreate")
 
         KeyboardVisibilityEvent.setEventListener(this,this)
-        login_btn.isEnabled = true
+        login_btn.isEnabled = false
         email_input.addTextChangedListener(this)
         password_input.addTextChangedListener(this)
         login_btn.setOnClickListener(this)
@@ -38,12 +39,16 @@ class LoginActivity : AppCompatActivity(), KeyboardVisibilityEventListener, Text
         val email = email_input.text.toString()
         val password = password_input.text.toString()
         if (validate(email, password)) {
-            //mAuth.signInWithEmailAndPassword(email,password) {}
+            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener{
+                if (it.isSuccessful) {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    finish()
+                }
+            }
         } else {
-
+            Toast.makeText(this,"Please enter email and password", Toast.LENGTH_SHORT).show()
         }
 
-        mAuth.signInWithEmailAndPassword(email, password)
     }
 
     override fun onVisibilityChanged(isKeyboardOpen: Boolean) {
