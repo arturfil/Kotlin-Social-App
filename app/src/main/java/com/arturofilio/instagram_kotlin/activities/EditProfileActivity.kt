@@ -74,7 +74,7 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
         val credential = EmailAuthProvider.getCredential(mUser.email, password)
         mAuth.currentUser!!.reauthenticate(credential).addOnCompleteListener {
             if (it.isSuccessful) {
-                mAuth.currentUser!!.reauthenticate(credential).addOnCompleteListener {
+                mAuth.currentUser!!.updateEmail(mPendingUser.email).addOnCompleteListener {
                     if (it.isSuccessful) {
                         updateUser(mPendingUser)
                     }
@@ -86,7 +86,7 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
     }
 
     private fun updateUser(user:User) {
-            val updatesMap = mutableMapOf<String,Any>()
+        val updatesMap = mutableMapOf<String,Any>()
         if(user.name != mUser.name) updatesMap["name"] = user.name
         if(user.username != mUser.username) updatesMap["username"] = user.username
         if(user.website != mUser.website) updatesMap["website"] = user.website
