@@ -1,8 +1,9 @@
-package com.arturofilio.instagram_kotlin
+package com.arturofilio.instagram_kotlin.activities
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import com.arturofilio.instagram_kotlin.R
 import kotlinx.android.synthetic.main.bottom_navigation_view.*
 
 abstract class BaseActivity(val navNumber: Int) : AppCompatActivity() {

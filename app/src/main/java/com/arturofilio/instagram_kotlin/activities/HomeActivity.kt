@@ -1,8 +1,9 @@
-package com.arturofilio.instagram_kotlin
+package com.arturofilio.instagram_kotlin.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import com.arturofilio.instagram_kotlin.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -28,7 +29,7 @@ class HomeActivity : BaseActivity(0) {
         }
         mAuth.addAuthStateListener {
             if (it.currentUser == null) {
-                startActivity(Intent(this,LoginActivity::class.java))
+                startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
         }

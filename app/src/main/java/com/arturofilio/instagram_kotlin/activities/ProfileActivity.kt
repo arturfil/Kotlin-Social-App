@@ -1,8 +1,9 @@
-package com.arturofilio.instagram_kotlin
+package com.arturofilio.instagram_kotlin.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import com.arturofilio.instagram_kotlin.R
 import kotlinx.android.synthetic.main.activity_profile.*
 
 class ProfileActivity : BaseActivity(4) {
@@ -16,7 +17,7 @@ class ProfileActivity : BaseActivity(4) {
         Log.d(TAG, "onCreate")
 
         edit_profile_btn.setOnClickListener{
-            val intent = Intent(this,EditProfileActivity::class.java)
+            val intent = Intent(this, EditProfileActivity::class.java)
             startActivity(intent)
         }
     }

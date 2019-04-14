@@ -1,7 +1,8 @@
-package com.arturofilio.instagram_kotlin
+package com.arturofilio.instagram_kotlin.activities
 
 import android.os.Bundle
 import android.util.Log
+import com.arturofilio.instagram_kotlin.R
 
 class SearchActivity : BaseActivity(1) {
 
