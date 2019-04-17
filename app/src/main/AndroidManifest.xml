@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.arturofilio.instagram_kotlin">
 
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,11 +26,21 @@
         <activity
             android:name=".activities.LoginActivity"
             android:windowSoftInputMode="stateVisible|adjustResize">
-            «
+
         </activity>
         <activity
             android:name=".activities.RegisterActivity"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
+
+        <provider
+            android:authorities="com.arturofilio.instagram_kotlin.fileprovider"
+            android:name="android.support.v4.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
     </application>
 
 </manifest>
