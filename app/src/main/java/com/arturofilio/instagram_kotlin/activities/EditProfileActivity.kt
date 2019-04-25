@@ -1,5 +1,6 @@
 package com.arturofilio.instagram_kotlin.activities
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
@@ -7,11 +8,16 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.support.v4.content.FileProvider
+import android.text.Editable
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import com.arturofilio.instagram_kotlin.R
 import com.arturofilio.instagram_kotlin.models.User
 import com.arturofilio.instagram_kotlin.views.PasswordDialog
+import com.bumptech.glide.Glide
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.module.AppGlideModule
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -61,7 +67,7 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
             bio_input.setText(mUser.bio, TextView.BufferType.EDITABLE)
             email_input.setText(mUser.email, TextView.BufferType.EDITABLE)
             phone_input.setText(mUser.phone.toString(), TextView.BufferType.EDITABLE)
-
+            profile_image.loadUserPhoto(mUser.photo)
         })
     }
 
@@ -89,12 +95,15 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == TAKE_PICTURE_REQUEST_CODE && resultCode == RESULT_OK) {
             val uid = mAuth.currentUser!!.uid
-            mStorage.child("users/$uid/photo").putFile(mImageUri).addOnCompleteListener{
+            mStorage.child("users/$uid/photo").putFile(mImageUri)
+                .addOnCompleteListener{
                 if (it.isSuccessful) {
-                    mDatabase.child("user/$uid/photo").setValue(it.result.downloadUrl.toString())
+                    val photoUrl = it.result.downloadUrl.toString()
+                    mDatabase.child("users/$uid/photo").setValue(photoUrl)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
-                                Log.d(TAG, "onActivityResult: photo saved successfully")
+                                mUser = mUser.copy(photo = photoUrl)
+                                profile_image.loadUserPhoto(mUser.photo)
                             } else {
                                 showToast(it.exception!!.message!!)
                             }
@@ -128,6 +137,17 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
         }
     }
 
+    private fun readInputs(): User {
+        return User(
+            name = name_input.text.toString(),
+            username = username_input.text.toString(),
+            website = website_input.text.toString(),
+             email = email_input.text.toString(),
+            bio = bio_input.text.toStringOrNull(),
+            phone = phone_input.text.toString().toLongOrNull()
+        )
+    }
+
     override fun onPasswordConfirm(password: String) {
         val credential = EmailAuthProvider.getCredential(mUser.email, password)
         mAuth.currentUser!!.reauthenticate(credential).addOnCompleteListener {
@@ -144,7 +164,7 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
     }
 
     private fun updateUser(user:User) {
-        val updatesMap = mutableMapOf<String,Any>()
+        val updatesMap = mutableMapOf<String,Any?>()
         if(user.name != mUser.name) updatesMap["name"] = user.name
         if(user.username != mUser.username) updatesMap["username"] = user.username
         if(user.website != mUser.website) updatesMap["website"] = user.website
@@ -162,6 +182,8 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
                 }
             }
     }
+
+
 
     private fun validate(user:User): String? =
         when {
