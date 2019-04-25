@@ -66,7 +66,7 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
             website_input.setText(mUser.website, TextView.BufferType.EDITABLE)
             bio_input.setText(mUser.bio, TextView.BufferType.EDITABLE)
             email_input.setText(mUser.email, TextView.BufferType.EDITABLE)
-            phone_input.setText(mUser.phone.toString(), TextView.BufferType.EDITABLE)
+            phone_input.setText(mUser.phone?.toString(), TextView.BufferType.EDITABLE)
             profile_image.loadUserPhoto(mUser.photo)
         })
     }
