@@ -4,10 +4,9 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import com.arturofilio.instagram_kotlin.R
 import com.arturofilio.instagram_kotlin.models.User
-import com.arturofilio.instagram_kotlin.utils.CameraPictureTaker
+import com.arturofilio.instagram_kotlin.utils.CameraHelper
 import com.arturofilio.instagram_kotlin.utils.FirebaseHelper
 import com.arturofilio.instagram_kotlin.utils.ValueEventListenerAdapater
 import com.arturofilio.instagram_kotlin.views.PasswordDialog
@@ -20,7 +19,7 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
     private lateinit var mUser: User
     private lateinit var mPendingUser: User
     private lateinit var mFirebaseHelper: FirebaseHelper
-    private lateinit var cameraPictureTaker: CameraPictureTaker
+    private lateinit var cameraPictureTaker: CameraHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +27,7 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
 
         Log.d(TAG, "onCreate")
 
-        cameraPictureTaker = CameraPictureTaker(this)
+        cameraPictureTaker = CameraHelper(this)
         close_image.setOnClickListener {finish() }
         save_image.setOnClickListener{ updateProfile() }
         change_photo_text.setOnClickListener{cameraPictureTaker.takeCameraPicture()}
