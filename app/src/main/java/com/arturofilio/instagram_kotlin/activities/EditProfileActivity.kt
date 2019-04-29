@@ -38,12 +38,12 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
         mFirebaseHelper.currentUserReference()
             .addListenerForSingleValueEvent(ValueEventListenerAdapater {
                 mUser = it.getValue(User::class.java)!!
-                name_input.setText(mUser!!.name, TextView.BufferType.EDITABLE)
-                username_input.setText(mUser.username, TextView.BufferType.EDITABLE)
-                website_input.setText(mUser.website, TextView.BufferType.EDITABLE)
-                bio_input.setText(mUser.bio, TextView.BufferType.EDITABLE)
-                email_input.setText(mUser.email, TextView.BufferType.EDITABLE)
-                phone_input.setText(mUser.phone?.toString(), TextView.BufferType.EDITABLE)
+                name_input.setText(mUser.name)
+                username_input.setText(mUser.username)
+                website_input.setText(mUser.website)
+                bio_input.setText(mUser.bio)
+                email_input.setText(mUser.email)
+                phone_input.setText(mUser.phone?.toString())
                 profile_image.loadUserPhoto(mUser.photo)
             })
     }
