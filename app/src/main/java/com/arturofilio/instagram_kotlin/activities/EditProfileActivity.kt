@@ -18,8 +18,8 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
     private val TAG = "EditProfileActivity"
     private lateinit var mUser: User
     private lateinit var mPendingUser: User
-    private lateinit var mFirebaseHelper: FirebaseHelper
-    private lateinit var cameraPictureTaker: CameraHelper
+    private lateinit var mFirebase: FirebaseHelper
+    private lateinit var mCamera: CameraHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,14 +27,14 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
 
         Log.d(TAG, "onCreate")
 
-        cameraPictureTaker = CameraHelper(this)
+        mCamera = CameraHelper(this)
         close_image.setOnClickListener {finish() }
         save_image.setOnClickListener{ updateProfile() }
-        change_photo_text.setOnClickListener{cameraPictureTaker.takeCameraPicture()}
+        change_photo_text.setOnClickListener{mCamera.takeCameraPicture()}
 
-        mFirebaseHelper = FirebaseHelper(this)
+        mFirebase = FirebaseHelper(this)
 
-        mFirebaseHelper.currentUserReference()
+        mFirebase.currentUserReference()
             .addListenerForSingleValueEvent(ValueEventListenerAdapater {
                 mUser = it.getValue(User::class.java)!!
                 name_input.setText(mUser.name)
@@ -48,10 +48,10 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == cameraPictureTaker.REQUEST_CODE && resultCode == RESULT_OK) {
-            mFirebaseHelper.uploadUserPhoto(cameraPictureTaker.imageUri!!) {
+        if (requestCode == mCamera.REQUEST_CODE && resultCode == RESULT_OK) {
+            mFirebase.uploadUserPhoto(mCamera.imageUri!!) {
                 val photoUrl = it.downloadUrl.toString()
-                mFirebaseHelper.updateUserPhoto(photoUrl) {
+                mFirebase.updateUserPhoto(photoUrl) {
                     mUser = mUser.copy(photo = photoUrl)
                     profile_image.loadUserPhoto(mUser.photo)
                 }
@@ -95,8 +95,8 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
     override fun onPasswordConfirm(password: String) {
         if(password.isNotEmpty()) {
             val credential = EmailAuthProvider.getCredential(mUser.email,password)
-            mFirebaseHelper.reauthenticate(credential) {
-                mFirebaseHelper.updateEmail(mPendingUser.email) {
+            mFirebase.reauthenticate(credential) {
+                mFirebase.updateEmail(mPendingUser.email) {
                     updateUser(mPendingUser)
                 }
             }
@@ -112,7 +112,7 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
         if(user.email != mUser.email) updatesMap["email"] = user.email
         if(user.phone != mUser.phone) updatesMap["phone"] = user.phone
 
-        mFirebaseHelper.updateUser(updatesMap) {
+        mFirebase.updateUser(updatesMap) {
             showToast("Profile Saved!")
             finish()
         }
