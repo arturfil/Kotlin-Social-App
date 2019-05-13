@@ -17,7 +17,7 @@
 
     <EditText
         android:id="@+id/email_input"
-        style="@style/login_input"
+        style="@style/big_input"
         android:hint="email"
         android:inputType="textEmailAddress"
         app:layout_constraintTop_toBottomOf="@+id/profile_image"/>
@@ -25,7 +25,7 @@
     <Button
         android:id="@+id/next_btn"
         android:text="Next"
-        style="@style/login_btn"
+        style="@style/big_btn"
         app:layout_constraintTop_toBottomOf="@+id/email_input"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".activities.ProfileActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -17,27 +14,32 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/insta_logo"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/back_image"
+                style="@style/icon"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/ic_back"/>
+
+            <TextView
+                style="@style/toolbar_title"
+                app:layout_constraintStart_toEndOf="@id/back_image"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@android:color/black"
+                android:textSize="19sp"
+                android:text="Discover People"/>
 
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.Toolbar>
-
+    
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/feed_recycler"
+        android:id="@+id/add_friends_recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"/>
-
-    <include layout="@layout/bottom_navigation_view" />
+        />
 
 </android.support.constraint.ConstraintLayout>

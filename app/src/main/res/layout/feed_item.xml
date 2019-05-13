@@ -39,12 +39,12 @@
         android:src="@drawable/image_placeholder"/>
     
     <ImageView
+        android:id="@+id/like_image"
         android:layout_height="45dp"
         android:layout_width="45dp"
         android:padding="10dp"
-        android:id="@+id/like_image"
         app:layout_constraintTop_toBottomOf="@+id/post_image"
-        app:layout_constraintBottom_toBottomOf="@+id/likes_text"
+        app:layout_constraintBottom_toTopOf="@+id/likes_text"
         app:layout_constraintStart_toStartOf="parent"
         android:src="@drawable/ic_likes_border"
         style="@style/icon"/>
@@ -87,7 +87,8 @@
         android:id="@+id/caption_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/likes_text"
+        android:paddingStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/likes_text"
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="will Smith This is a caption sample for the post."

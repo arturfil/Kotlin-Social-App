@@ -43,7 +43,7 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
                 bio_input.setText(mUser.bio)
                 email_input.setText(mUser.email)
                 phone_input.setText(mUser.phone?.toString())
-                profile_image.loadUserPhoto(mUser.photo)
+                profile_image.loadUserPhoto(mUser.photo.toString())
             })
     }
 
@@ -53,7 +53,7 @@ class EditProfileActivity : AppCompatActivity(), PasswordDialog.Listener {
                 val photoUrl = it.downloadUrl.toString()
                 mFirebase.updateUserPhoto(photoUrl) {
                     mUser = mUser.copy(photo = photoUrl)
-                    profile_image.loadUserPhoto(mUser.photo)
+                    profile_image.loadUserPhoto(mUser.photo.toString())
                 }
             }
         }

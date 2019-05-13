@@ -31,7 +31,8 @@
         <activity
             android:name=".activities.RegisterActivity"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
-
+        <activity android:name=".activities.ProfileSettignsActivity"/>
+        <activity android:name=".activities.AddFriendsActivity"/>
         <provider
             android:authorities="com.arturofilio.instagram_kotlin.fileprovider"
             android:name="android.support.v4.content.FileProvider"

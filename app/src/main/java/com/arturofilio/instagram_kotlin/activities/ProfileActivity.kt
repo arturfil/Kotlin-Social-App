@@ -36,12 +36,20 @@ class ProfileActivity : BaseActivity(4) {
             val intent = Intent(this, EditProfileActivity::class.java)
             startActivity(intent)
         }
+        settigns_image.setOnClickListener{
+            val intent = Intent(this,ProfileSettignsActivity::class.java)
+            startActivity(intent)
+        }
+        add_friends_image.setOnClickListener {
+            val intent = Intent(this,AddFriendsActivity::class.java)
+            startActivity(intent)
+        }
 
         mFirebase = FirebaseHelper(this)
         mFirebase.currentUserReference().addValueEventListener(ValueEventListenerAdapater{
 
             mUser = it.getValue(User::class.java)!!
-            profile_pic.loadUserPhoto(mUser.photo)
+            profile_pic.loadUserPhoto(mUser.photo.toString())
             username_text.text = mUser.username
         })
 
@@ -49,7 +57,7 @@ class ProfileActivity : BaseActivity(4) {
         mFirebase.database.child("images").child(mFirebase.auth.currentUser!!.uid)
             .addValueEventListener(ValueEventListenerAdapater{
                 val images = it.children.map{ it.getValue(String::class.java)!!}
-                images_recycler.adapter = ImagesAdapter(images + images + images + images)
+                images_recycler.adapter = ImagesAdapter(images)
             })
     }
 }
@@ -67,10 +75,6 @@ class ImagesAdapter(private val images: List<String>) : RecyclerView.Adapter<Ima
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.image.loadImage(images[position])
-    }
-
-    private fun ImageView.loadImage(image: String) {
-        GlideApp.with(this).load(image).centerCrop().into(this)
     }
 
     override fun getItemCount(): Int = images.size
