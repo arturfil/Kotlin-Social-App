@@ -6,4 +6,4 @@ data class User(val name: String = "", val username: String = "", val website: S
                 val folows: Map<String, Boolean> = emptyMap(),
                 val followers: Map<String, Boolean> = emptyMap(),
                 val bio: String? = null, val email: String = "", val phone: Long? = null,
-                val photo: String? = null, @Exclude val uid: String? = null)
+                val photo: String? = null, @Exclude val uid: String = "")

@@ -48,7 +48,7 @@ class ProfileActivity : BaseActivity(4) {
         mFirebase = FirebaseHelper(this)
         mFirebase.currentUserReference().addValueEventListener(ValueEventListenerAdapater{
 
-            mUser = it.getValue(User::class.java)!!
+            mUser = it.asUser()!!
             profile_pic.loadUserPhoto(mUser.photo.toString())
             username_text.text = mUser.username
         })

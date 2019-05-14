@@ -7,7 +7,7 @@
     android:paddingStart="10dp"
     android:paddingEnd="10dp">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/photo_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/secondary_small_btn"
-        android:text="Unollow"
+        android:text="Unfollow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/username_text" />
 
